@@ -9,7 +9,7 @@
 </head>
 <body>
     <h1>HOME VIEW</h1>
-    <p>test view: <?php echo htmlspecialchars($name); ?> </p>
+    <p>test view: {{ name }} </p>
 
     <ul>
         <?php foreach($colors as $color): ?>
