@@ -11,7 +11,7 @@ class Home extends Controller
     {
         echo 'Home Controller - index';
 
-        View::render('Home/index.php',[
+        View::renderTemplate('Home/index.php',[
             'name' => 'Busik',
             'colors' => ['red', 'green', 'blue']
         ]);

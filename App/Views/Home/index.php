@@ -12,9 +12,9 @@
     <p>test view: {{ name }} </p>
 
     <ul>
-        <?php foreach($colors as $color): ?>
-            <li><?php echo htmlspecialchars($color); ?></li>
-        <?php endforeach; ?>
+        {% for color in colors %}
+        <li>{{ color }}</li>
+        {% endfor %}
     </ul>
 </body>
 </html>

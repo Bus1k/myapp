@@ -2,6 +2,13 @@
 
 use Core\Router;
 
+
+error_reporting(-1);
+ini_set('display_errors', 'On');
+
+//TWIG
+require_once dirname(__DIR__) . '/vendor/autoload.php';
+
 //AUTOLOADER
 spl_autoload_register(function ($class)
 {
