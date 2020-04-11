@@ -52,26 +52,28 @@ class Router
 
     public function dispatch($url)
     {
+        $url = $this->removeQueryStringVariable($url);
+
         if($this->match($url))
         {
             $controller = $this->params['controller'];
             $controller = $this->convertToStudlyCaps($controller);
-            $controller = "App\Controllers\\$controller";
+            $controller = $this->getNamespace() . $controller;
 
             if(class_exists($controller))
             {
-                $controller_object = new $controller();
+                $controller_object = new $controller($this->params);
 
                 $action = $this->params['action'];
                 $action = $this->convertToCamelCase($action);
 
-                if(is_callable([$controller_object, $action]))
+                if(preg_match('/action$/i', $action)  == 0)
                 {
                     $controller_object->$action();
                 }
                 else
                 {
-                    echo "Method $action (in controller $controller) not found";
+                    echo "Method $action in controller $controller cannot be called directly - remove the Action suffix to call this method";
                 }
             }
             else
@@ -83,6 +85,39 @@ class Router
         {
             echo "No route matched";
         }
+    }
+
+    /*
+     * URL: localhost/posts/index?page=1
+     * posts/index?page=1 => posts/index
+     */
+    protected function removeQueryStringVariable($url)
+    {
+        if($url != '')
+        {
+            $parts = explode('&', $url, 2);
+
+            if(strpos($parts[0], '=') ===false)
+            {
+                $url = $parts[0];
+            }
+            else
+            {
+                $url = '';
+            }
+            return $url;
+        }
+    }
+
+    protected function getNamespace()
+    {
+        $namespace = 'App\Controllers\\';
+
+        if(array_key_exists('namespace', $this->params))
+        {
+            $namespace .= $this->params['namespace'] . '\\';
+        }
+        return $namespace;
     }
 
     protected function convertToStudlyCaps($string)
