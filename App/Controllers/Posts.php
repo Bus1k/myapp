@@ -4,13 +4,13 @@ namespace App\Controllers;
 
 
 use Core\Controller;
+use Core\View;
 
 class Posts extends Controller
 {
     public function indexAction()
     {
-        echo 'Post Controller - test index <br>';
-        echo 'TEST PARAMS: <pre>'. htmlspecialchars(print_r($_GET, true)) . '</pre>';
+        View::renderTemplate('Posts/index.html');
     }
 
     public function addNewAction()

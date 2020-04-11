@@ -9,21 +9,9 @@ class Home extends Controller
 {
     public function indexAction()
     {
-        echo 'Home Controller - index';
-
-        View::renderTemplate('Home/index.php',[
+        View::renderTemplate('Home/index.html',[
             'name' => 'Busik',
             'colors' => ['red', 'green', 'blue']
         ]);
-    }
-
-    protected function before()
-    {
-        echo '(BEFORE FILTER)<br>';
-    }
-
-    protected function after()
-    {
-        echo '<br>(AFTER FILTER)';
     }
 }
