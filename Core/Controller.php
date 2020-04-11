@@ -33,9 +33,10 @@ abstract class Controller
     }
 
     //Before Filter - Called before an action method
+    //False return stops further execution
     protected function before()
     {
-
+        //return false
     }
 
     //After Filter - Called after an action method
