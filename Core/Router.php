@@ -1,5 +1,8 @@
 <?php
 
+namespace Core;
+
+
 class Router
 {
     protected $routes = [];
@@ -53,6 +56,7 @@ class Router
         {
             $controller = $this->params['controller'];
             $controller = $this->convertToStudlyCaps($controller);
+            $controller = "App\Controllers\\$controller";
 
             if(class_exists($controller))
             {

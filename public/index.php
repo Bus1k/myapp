@@ -1,7 +1,17 @@
 <?php
 
-require '../App/Controllers/Posts.php';
-require '../Core/Router.php';
+use Core\Router;
+
+//AUTOLOADER
+spl_autoload_register(function ($class)
+{
+    $root = dirname(__DIR__); //get the parent directory
+    $file = $root . '/' . str_replace('\\', '/', $class) . '.php';
+    if(is_readable($file))
+    {
+        require $root . '/' . str_replace('\\', '/', $class) . '.php';
+    }
+});
 
 $router = new Router();
 
@@ -25,5 +35,4 @@ $url = $_SERVER['QUERY_STRING'];
 //{
 //    echo 'No found route URL: '.$url;
 //}
-
 $router->dispatch($url);
