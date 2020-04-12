@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block body %}
+
+    <h1>HOME VIEW</h1>
+    <p>test view: {{ name }} </p>
+
+    <ul>
+        {% for color in colors %}
+        <li>{{ color }}</li>
+        {% endfor %}
+    </ul>
+
+{% endblock %}
