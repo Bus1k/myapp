@@ -15,7 +15,7 @@
         </ul>
     {% endif %}
 
-    <form method='POST' action="/signup/create">
+    <form method='POST' action="/signup/create" id="formSignup">
         <div>
             <label for="inputName">Name</label>
             <input id="inputName" type="text" name="name" placeholder="Name" autofocus value="{{ user.name }}" required />
@@ -26,14 +26,48 @@
         </div>
         <div>
             <label for="inputPassword">Password</label>
-            <input id="inputPassword" type="password" name="password" placeholder="Password" required
-            pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$" title="Minimum 6 chars, at least one letter and number"/>
-        </div>
-        <div>
-            <label for="inputPasswordConfirm">Repeat Password</label>
-            <input id="inputPasswordConfirm" type="password" name="password_confirmation" placeholder="Repeat Password" required/>
+            <input id="inputPassword" type="password" name="password" placeholder="Password" required />
         </div>
         <button type="submit">Sing up</button>
     </form>
 
+{% endblock %}
+
+{% block footer %}
+    <script>
+        $.validator.addMethod('validPassword',
+            function (value, element, param) {
+                if(value != '')
+                {
+                    if(value.match(/.*[a-z]+.*/i) == null)
+                    {
+                        return false;
+                    }
+                    if(value.match(/.*\d+.*/) == null)
+                    {
+                        return false;
+                    }
+                }
+                return true;
+            },
+            'Must contain at least one letter and one number'
+        );
+
+        $(document).ready(function () {
+            $('#formSignup').validate({
+                rules: {
+                    name: 'required',
+                    email: {
+                        required: true,
+                        email: true
+                    },
+                    password: {
+                        required: true,
+                        minlength: 6,
+                        validPassword: true
+                    }
+                }
+            });
+        });
+    </script>
 {% endblock %}

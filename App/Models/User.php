@@ -57,12 +57,6 @@ class User extends Model
             $this->errors[] = 'Email Address already taken';
         }
 
-        //Password match
-        if($this->password != $this->password_confirmation)
-        {
-            $this->errors[] = 'Password must match confirmation';
-        }
-
         //Password length
         if(strlen($this->password) < 6)
         {
