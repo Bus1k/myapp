@@ -3,11 +3,12 @@
 use Core\Router;
 
 
-error_reporting(-1);
-ini_set('display_errors', 'On');
-
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+//Errors and Exceptions
+error_reporting(E_ALL);
+set_error_handler('Core\Error::errorHandler');
+set_exception_handler('Core\Error::exceptionHandler');
 
 $router = new Router();
 
