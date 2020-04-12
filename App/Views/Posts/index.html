@@ -7,4 +7,12 @@
     <h1>POSTS VIEW</h1>
     <p>test view</p>
 
+    <ul>
+        {% for post in posts %}
+        <h1>{{ post.title }}</h1>
+        <p>{{ post.content }}</p>
+        {% endfor %}
+    </ul>
+
+
 {% endblock %}
