@@ -30,8 +30,6 @@ class Router
     public function match($url)
     {
         //URL: controller/action - posts/index
-        //$reg_exp = '/^(?P<controller>[a-z-]+)\/(?P<action>[a-z-]+)$/';
-
         foreach($this->routes as $route => $params)
         {
             if(preg_match($route, $url, $matches))
