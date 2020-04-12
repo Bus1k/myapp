@@ -13,5 +13,5 @@ class Config
     const DB_CHARSET   = 'utf8';
 
     //SHOW OR HIDE ERRORS ON SCREEN
-    const SHOW_ERRORS = false;
+    const SHOW_ERRORS = true;
 }
