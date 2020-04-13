@@ -19,8 +19,7 @@ class Signup extends Controller
 
         if($user->save())
         {
-            header('Location: /signup/success', true, 303);
-            exit;
+            $this->redirect('/signup/success');
         }
         else
         {

@@ -4,13 +4,16 @@
 
 {% block body %}
 
-<h1>HOME VIEW</h1>
-<p>test view: {{ name }} </p>
+    {% if is_logged_in %}
+        User is logged in.
+        <a href="/logout">Logout</a>
+    {% else %}
+        <nav>
+            <a href="/signup/new">Signup</a>
+            <a href="/login">Login</a>
+        </nav>
+    {% endif %}
 
-<ul>
-    {% for color in colors %}
-    <li>{{ color }}</li>
-    {% endfor %}
-</ul>
+        <h1>HOME VIEW</h1>
 
 {% endblock %}
