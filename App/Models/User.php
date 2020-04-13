@@ -89,6 +89,20 @@ class User extends Model
         return $stmt->fetch();
     }
 
+    public static function findById($id)
+    {
+        $query = 'SELECT * FROM users WHERE id = :id';
+
+        $db = static::getDB();
+        $stmt = $db->prepare($query);
+
+        $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+        $stmt->setFetchMode(PDO::FETCH_CLASS, get_called_class());
+        $stmt->execute();
+
+        return $stmt->fetch();
+    }
+
     public static function authenticate($email, $password)
     {
         $user = static::findByEmail($email);

@@ -6,6 +6,7 @@ namespace App\Controllers;
 use App\Models\User;
 use Core\Auth;
 use Core\Controller;
+use Core\FlashMessage;
 use Core\View;
 
 
@@ -25,10 +26,13 @@ class Login extends Controller
         {
             Auth::login($user);
 
-            $this->redirect('/');
+            FlashMessage::addMessage('Login Successful');
+
+            $this->redirect(Auth::getReturnToPage());
         }
         else
         {
+            FlashMessage::addMessage('Login Unsuccessful, please try again', FlashMessage::WARNING);
             View::renderTemplate('Login/new.html', [
                 'email' => $_POST['email']
             ]);
@@ -38,7 +42,12 @@ class Login extends Controller
     public function destroyAction()
     {
         Auth::logout();
+        $this->redirect('/login/show-logout-message');
+    }
 
+    public function showLogoutMessageAction()
+    {
+        FlashMessage::addMessage('Logout Successful');
         $this->redirect('/');
     }
 }

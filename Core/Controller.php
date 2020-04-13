@@ -50,4 +50,15 @@ abstract class Controller
         header('Location: http://' . $_SERVER['HTTP_HOST'] . $url, true, 303);
         exit;
     }
+
+    public function requireLogin()
+    {
+        if(!Auth::getUser())
+        {
+            FlashMessage::addMessage('Please login to access that page', FlashMessage::INFO);
+
+            Auth::rememberRequestedPage();
+            $this->redirect('/login');
+        }
+    }
 }
