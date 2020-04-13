@@ -30,10 +30,10 @@
         </div>
         <button type="submit">Sing up</button>
     </form>
-
 {% endblock %}
 
 {% block footer %}
+    <script src="/js/hideShowPassword.min.js"></script>
     <script>
         $.validator.addMethod('validPassword',
             function (value, element, param) {
@@ -59,14 +59,25 @@
                     name: 'required',
                     email: {
                         required: true,
-                        email: true
+                        email: true,
+                        remote: '/account/validate-email'
                     },
                     password: {
                         required: true,
                         minlength: 6,
                         validPassword: true
                     }
+                },
+                messages: {
+                    email: {
+                        remote: 'Email Address already taken'
+                    }
                 }
+            });
+
+            $('#inputPassword').hideShowPassword({
+                show: false,
+                innerToggle: 'focus'
             });
         });
     </script>

@@ -52,7 +52,7 @@ class User extends Model
             $this->errors[] = 'Invalid email';
         }
 
-        if($this->emailExist($this->email))
+        if(static::emailExist($this->email))
         {
             $this->errors[] = 'Email Address already taken';
         }
@@ -70,7 +70,7 @@ class User extends Model
         }
     }
 
-    public function emailExist($email)
+    public static function emailExist($email)
     {
         $query = 'SELECT * FROM users WHERE email = :email';
 
