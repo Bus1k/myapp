@@ -26,13 +26,18 @@ class FlashMessage
         ];
     }
 
-    //do fixniecia nie dziala unsetowanie $_SESSION['flash_notifications']
-    //wykrzacza sie przez co flashmessage znika odrazu pewnie cos zjebanego z redirect
     public static function getMessages()
     {
         if(isset($_SESSION['flash_notifications']))
         {
-            return $_SESSION['flash_notifications'];
+            $msg = $_SESSION['flash_notifications'];
+
+            if(!empty($_SESSION['flash_notifications']))
+            {
+                unset($_SESSION['flash_notifications']);
+            }
+
+            return $msg;
         }
     }
 }
