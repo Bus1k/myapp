@@ -14,4 +14,7 @@ class Config
 
     //SHOW OR HIDE ERRORS ON SCREEN
     const SHOW_ERRORS = true;
+
+    //SET SECRET KEY HMAC
+    const SECRET_KEY = 'y5NJsCkWHGqRdZxsVFSIXMulauJJpS5C';
 }
