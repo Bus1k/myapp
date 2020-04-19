@@ -53,27 +53,39 @@ class User extends Model
             $this->errors[] = 'Invalid email';
         }
 
-        if(static::emailExist($this->email))
+        if(static::emailExist($this->email, $this->id ?? null))
         {
             $this->errors[] = 'Email Address already taken';
         }
 
         //Password length
-        if(strlen($this->password) < 6)
+        if(isset($this->password))
         {
-            $this->errors[] = 'Please eneter at least 6 characters for the password';
-        }
+            if(strlen($this->password) < 6)
+            {
+                $this->errors[] = 'Please eneter at least 6 characters for the password';
+            }
 
-        //Password one number contain
-        if(preg_match('/.*\d+.*/i', $this->password) == 0)
-        {
-            $this->errors[] = 'Password needs at least one number';
+            //Password one number contain
+            if(preg_match('/.*\d+.*/i', $this->password) == 0)
+            {
+                $this->errors[] = 'Password needs at least one number';
+            }
         }
     }
 
-    public static function emailExist($email)
+    public static function emailExist($email, $ignore_id = null)
     {
-        return static::findByEmail($email) !== false;
+        $user = static::findByEmail($email);
+
+        if($user)
+        {
+            if($user->id != $ignore_id)
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     public static function findByEmail($email)
@@ -135,5 +147,47 @@ class User extends Model
         $stmt->bindValue(':expires_at', date('Y-m-d H:i:s', $this->expiry_timestamp), PDO::PARAM_STR);
 
         return $stmt->execute();
+    }
+
+    public function updateProfile($data)
+    {
+        $this->name = $data['name'];
+        $this->email = $data['email'];
+
+        if($data['password'] != '')
+        {
+            $this->password = $data['password'];
+        }
+
+        $this->validate();
+
+        if(empty($this->errors))
+        {
+            $query = 'UPDATE users SET name = :name, email = :email';
+
+            //Add password if it's set
+            if(isset($this->password))
+            {
+                $query .= ', password_hash = :password_hash';
+            }
+
+            $query .= ' WHERE id = :id';
+
+            $db = static::getDB();
+            $stmt = $db->prepare($query);
+            $stmt->bindValue(':name', $this->name, PDO::PARAM_STR);
+            $stmt->bindValue(':email', $this->email, PDO::PARAM_STR);
+            $stmt->bindValue(':id', $this->id, PDO::PARAM_INT);
+
+            if(isset($this->password))
+            {
+                $password_hash = password_hash($this->password, PASSWORD_DEFAULT);
+                $stmt->bindValue(':password_hash', $password_hash, PDO::PARAM_STR);
+            }
+
+            return $stmt->execute();
+        }
+
+        return false;
     }
 }
