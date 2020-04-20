@@ -16,19 +16,19 @@
     {% endif %}
 
     <form method='POST' action="/signup/create" id="formSignup">
-        <div>
+        <div class="form-group">
             <label for="inputName">Name</label>
-            <input id="inputName" type="text" name="name" placeholder="Name" autofocus value="{{ user.name }}" required />
+            <input id="inputName" type="text" name="name" placeholder="Name" autofocus value="{{ user.name }}" required class="form-control"/>
         </div>
-        <div>
+        <div class="form-group">
             <label for="inputEmail">Email adress</label>
-            <input id="inputEmail" type="email" name="email" placeholder="Email Adress" value="{{ user.email }}" required />
+            <input id="inputEmail" type="email" name="email" placeholder="Email Adress" value="{{ user.email }}" required class="form-control"/>
         </div>
-        <div>
+        <div class="form-group">
             <label for="inputPassword">Password</label>
-            <input id="inputPassword" type="password" name="password" placeholder="Password" required />
+            <input id="inputPassword" type="password" name="password" placeholder="Password" required class="form-control"/>
         </div>
-        <button type="submit">Sing up</button>
+        <button type="submit" class="btn btn-primary">Sing up</button>
     </form>
 {% endblock %}
 
