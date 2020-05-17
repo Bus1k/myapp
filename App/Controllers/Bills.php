@@ -2,15 +2,15 @@
 
 namespace App\Controllers;
 
-
-use App\Models\Bill;
 use Core\View;
+use App\Models\Bill;
+
 
 class Bills extends Authenticated
 {
-    public function showAction()
+    public function indexAction()
     {
-        View::renderTemplate('Bills/show.html');
+        View::renderTemplate('Bills/index.html');
     }
 
     public function addAction()
@@ -20,12 +20,12 @@ class Bills extends Authenticated
 
     public function saveAction()
     {
-        var_dump($_FILES);
-        die();
         $bill = new Bill($_POST);
+
         if($bill->save())
         {
-            $this->redirect('/bills/show');
+            $this->redirect('/bills/index');
         }
     }
+
 }
