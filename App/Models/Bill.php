@@ -11,7 +11,10 @@ class Bill extends Model
 
     public function __construct($data = [])
     {
-        $this->description = $data['description'];
+        if(isset($data['description']))
+        {
+            $this->description = $data['description'];
+        }
     }
 
     public function save()
@@ -35,6 +38,6 @@ class Bill extends Model
         $stmt->setFetchMode(PDO::FETCH_CLASS, get_called_class());
         $stmt->execute();
 
-        return $stmt->fetch();
+        return $stmt->fetchAll();
     }
 }

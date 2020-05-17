@@ -10,7 +10,10 @@ class Bills extends Authenticated
 {
     public function indexAction()
     {
-        View::renderTemplate('Bills/index.html');
+        $bills = (new Bill())->getAllBills();
+        View::renderTemplate('Bills/index.html',[
+            'bills' => $bills
+        ]);
     }
 
     public function addAction()

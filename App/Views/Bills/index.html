@@ -7,6 +7,21 @@
 <h1>Bills</h1>
 <a href="/bills/add">Add new bill</a>
 
-
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for bill in bills %}
+    <tr>
+        <th scope="row">{{bill.id}}</th>
+        <td>{{bill.description}}</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
 
 {% endblock %}
