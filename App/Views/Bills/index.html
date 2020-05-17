@@ -11,6 +11,7 @@
     <thead>
     <tr>
         <th scope="col">#</th>
+        <th scope="col">Shop</th>
         <th scope="col">Description</th>
         <th scope="col">Bill Date</th>
     </tr>
@@ -19,6 +20,7 @@
     {% for bill in bills %}
     <tr>
         <th scope="row">{{bill.id}}</th>
+        <td>{{bill.shop}}</td>
         <td>{{bill.description}}</td>
         <td>{{bill.date}}</td>
     </tr>

@@ -7,6 +7,7 @@ use PDO;
 
 class Bill extends Model
 {
+    public $shop;
     public $description;
     public $billDate;
 
@@ -14,6 +15,7 @@ class Bill extends Model
     {
         if(!empty($data))
         {
+            $this->shop = $data['shopName'];
             $this->description = $data['description'];
             $this->billDate = $data['billDate'];
         }
@@ -21,11 +23,12 @@ class Bill extends Model
 
     public function save()
     {
-        $query = 'INSERT INTO bills (description, date) VALUES (:description, :billDate)';
+        $query = 'INSERT INTO bills (shop, description, date) VALUES (:shop, :description, :billDate)';
 
         $db = static::getDB();
         $stmt = $db->prepare($query);
 
+        $stmt->bindValue(':shop', $this->shop, PDO::PARAM_STR);
         $stmt->bindValue(':description', $this->description, PDO::PARAM_STR);
         $stmt->bindValue(':billDate', $this->billDate, PDO::PARAM_STR);
 
