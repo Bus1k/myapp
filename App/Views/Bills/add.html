@@ -2,10 +2,6 @@
 
 {% block title %}Bills{% endblock %}
 
-{% block style %}
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-{% endblock %}
-
 {% block body %}
 
 <h1>Add new bill</h1>
@@ -16,8 +12,16 @@
         <input id="shopName" type="text" name="shopName" placeholder="Shop Name" autofocus class="form-control"/>
     </div>
     <div class="form-group">
+        <label for="payer">Payer</label>
+        <input id="payer" type="text" name="payer" placeholder="Payer Name" autofocus class="form-control"/>
+    </div>
+    <div class="form-group">
         <label for="description">Description</label>
         <input id="description" type="text" name="description" placeholder="Description" class="form-control"/>
+    </div>
+    <div class="form-group">
+        <label for="price">Price</label>
+        <input id="price" type="number" name="price" placeholder="Price" class="form-control"/>
     </div>
     <div class="form-group">
         <label for="billDate">Date</label>

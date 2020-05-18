@@ -8,6 +8,8 @@ use Core\View;
 
 class Profile extends Authenticated
 {
+    protected $user;
+
     protected function before()
     {
         parent::before();

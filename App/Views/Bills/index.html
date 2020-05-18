@@ -12,8 +12,11 @@
     <tr>
         <th scope="col">#</th>
         <th scope="col">Shop</th>
+        <th scope="col">Payer</th>
         <th scope="col">Description</th>
+        <th scope="col">Price</th>
         <th scope="col">Bill Date</th>
+        <th scope="col">Action</th>
     </tr>
     </thead>
     <tbody>
@@ -21,8 +24,11 @@
     <tr>
         <th scope="row">{{bill.id}}</th>
         <td>{{bill.shop}}</td>
+        <td>{{bill.payer}}</td>
         <td>{{bill.description}}</td>
+        <td>{{bill.price}}</td>
         <td>{{bill.date}}</td>
+        <td><a href="/bills/edit/{{bill.id}}"><i class="far fa-edit"></i></a><a href="/bills/delete/{{bill.id}}"><i class="far fa-trash-alt"></i></a></td>
     </tr>
     {% endfor %}
     </tbody>

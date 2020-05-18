@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block title %}Edit Bill{% endblock %}
+
+{% block body %}
+
+<h1>Edit Bill</h1>
+
+<form method="POST" action="/bills/update" id="formNewBill">
+    <div class="form-group">
+        <label for="shopName">Shop name</label>
+        <input id="shopName" type="text" name="shopName" placeholder="Shop Name" value="{{bill.shop}}" autofocus class="form-control"/>
+    </div>
+    <div class="form-group">
+        <label for="payer">Payer</label>
+        <input id="payer" type="text" name="payer" placeholder="Payer Name" value="{{bill.payer}}" class="form-control"/>
+    </div>
+    <div class="form-group">
+        <label for="description">Description</label>
+        <input id="description" type="text" name="description" placeholder="Description" value="{{bill.description}}" class="form-control"/>
+    </div>
+    <div class="form-group">
+        <label for="price">Price</label>
+        <input id="price" type="number" name="price" placeholder="Price" value="{{bill.price}}" class="form-control"/>
+    </div>
+    <div class="form-group">
+        <label for="billDate">Date</label>
+        <input id="billDate" type="text" name="billDate" placeholder="Date" value="{{bill.date}}" class="form-control" autocomplete="off"/>
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+</form>
+
+{% endblock %}
+
+{% block footer %}
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script>
+    $(function () {
+        // INITIALIZE DATEPICKER PLUGIN
+        $('#billDate').datepicker({
+            dateFormat: 'yy/mm/dd'
+        });
+    });
+</script>
+{% endblock %}
