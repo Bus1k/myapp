@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use Core\Auth;
 use Core\FlashMessage;
 use Core\View;
 use App\Models\Bill;
@@ -10,24 +11,32 @@ use App\Models\Bill;
 class Bills extends Authenticated
 {
     protected $bill;
+    protected $user;
+
+    public function before()
+    {
+        parent::before();
+        $this->bill = new Bill();
+        $this->user = Auth::getUser();
+    }
 
     public function indexAction()
     {
-        $bills = (new Bill())->getAllBills();
         View::renderTemplate('Bills/index.html',[
-            'bills' => $bills
+            'bills' => $this->bill->getAllBills()
         ]);
     }
 
     public function addAction()
     {
-        View::renderTemplate('Bills/add.html');
+        View::renderTemplate('Bills/add.html', [
+            'user' => $this->user
+        ]);
     }
 
     public function saveAction()
     {
         $bill = new Bill($_POST);
-
         if($bill->save())
         {
             $this->redirect('/bills/index');
@@ -36,8 +45,7 @@ class Bills extends Authenticated
 
     public function deleteAction()
     {
-        $bill = new Bill();
-        if($bill->delete($this->route_params['id']))
+        if($this->bill->delete($this->route_params['id']))
         {
             FlashMessage::addMessage('Bill successfully deleted', FlashMessage::INFO);
             $this->redirect('/bills/index');
@@ -47,15 +55,18 @@ class Bills extends Authenticated
 
     public function editAction()
     {
-        $bill = (new Bill())->getBillById($this->route_params['id']);
         View::renderTemplate('Bills/edit.html',[
-            'bill' => $bill
+            'bill' => $this->bill->getBillById($this->route_params['id'])
         ]);
     }
 
     public function updateAction()
     {
-
+        if($this->bill->update($_POST, $this->route_params['id']))
+        {
+            FlashMessage::addMessage('Bill successfully updated', FlashMessage::INFO);
+            $this->redirect('/bills/index');
+        }
     }
 
 }
