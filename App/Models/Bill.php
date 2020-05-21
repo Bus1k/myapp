@@ -43,7 +43,7 @@ class Bill extends Model
 
     public function getAllBills()
     {
-        $query = 'SELECT b.id, b.shop, b.description, b.price, b.date, u.name FROM bills b INNER JOIN users u ON b.payer = u.id';
+        $query = 'SELECT b.id, s.name as shop, b.description, b.price, b.date, u.name FROM bills b INNER JOIN users u ON b.payer = u.id INNER JOIN shops s ON b.shop = s.id';
 
         $db = static::getDB();
         $stmt = $db->prepare($query);

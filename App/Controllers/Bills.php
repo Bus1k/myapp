@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Models\Shop;
 use Core\Auth;
 use Core\FlashMessage;
 use Core\View;
@@ -12,12 +13,14 @@ class Bills extends Authenticated
 {
     protected $bill;
     protected $user;
+    protected $shop;
 
     public function before()
     {
         parent::before();
         $this->bill = new Bill();
         $this->user = Auth::getUser();
+        $this->shop = new Shop();
     }
 
     public function indexAction()
@@ -31,7 +34,8 @@ class Bills extends Authenticated
     public function addAction()
     {
         View::renderTemplate('Bills/add.html', [
-            'user' => $this->user
+            'user' => $this->user,
+            'shops' => $this->shop->getAllShops()
         ]);
     }
 

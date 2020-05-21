@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %}Shops{% endblock %}
+
+{% block body %}
+
+<h1>Shops</h1>
+<a href="/shops/add">Add new shop</a>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col">Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for shop in shops %}
+    <tr>
+        <th scope="row">{{shop.id}}</th>
+        <td>{{shop.name}}</td>
+        <td><a href="/shops/delete/{{shop.id}}"><i class="far fa-trash-alt"></i></a></td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

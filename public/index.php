@@ -19,6 +19,7 @@ $router->add('', ['controller' => 'Home', 'action' => 'index']);
 $router->add('login', ['controller' => 'Login', 'action' => 'new']);
 $router->add('logout', ['controller' => 'Login', 'action' => 'destroy']);
 $router->add('bills', ['controller' => 'Bills', 'action' => 'index']);
+$router->add('shops', ['controller' => 'Shops', 'action' => 'index']);
 $router->add('{controller}/{action}');
 $router->add('{controller}/{action}/{id:\d+}');
 
