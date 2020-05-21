@@ -24,11 +24,29 @@
     <tr>
         <th scope="row">{{bill.id}}</th>
         <td>{{bill.shop}}</td>
-        <td>{{bill.payer}}</td>
+        <td>{{bill.name}}</td>
         <td>{{bill.description}}</td>
         <td>{{bill.price}}</td>
         <td>{{bill.date}}</td>
         <td><a href="/bills/edit/{{bill.id}}"><i class="far fa-edit"></i></a><a href="/bills/delete/{{bill.id}}"><i class="far fa-trash-alt"></i></a></td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+<h2>Summary</h2>
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Amount</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for sum in summary %}
+    <tr>
+        <td>{{sum.name}}</td>
+        <td>{{sum.amount}}</td>
     </tr>
     {% endfor %}
     </tbody>

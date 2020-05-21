@@ -23,7 +23,8 @@ class Bills extends Authenticated
     public function indexAction()
     {
         View::renderTemplate('Bills/index.html',[
-            'bills' => $this->bill->getAllBills()
+            'bills' => $this->bill->getAllBills(),
+            'summary' => $this->bill->getSummary()
         ]);
     }
 
